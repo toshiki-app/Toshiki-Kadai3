@@ -20,28 +20,33 @@ final class ViewController: UIViewController {
         
         let switches: [UISwitch] = [switch1, switch2]
         switches.forEach { $0.isOn = false }
-        
     }
 
     @IBAction func calculate() {
         
-        guard var number1 = Int(textfield1.text ?? ""), var number2 = Int(textfield2.text ?? "") else {
+        guard let number1 = Int(textfield1.text ?? ""), let number2 = Int(textfield2.text ?? "") else {
             resultLabel.text = "数字を入力して下さい。"
             return
         }
-        
+
+        let signedNumber1: Int
         if switch1.isOn {
-            number1 = -number1
+            signedNumber1 = -number1
+        } else {
+            signedNumber1 = number1
         }
         
+        let signedNumber2: Int
         if switch2.isOn {
-            number2 = -number2
+            signedNumber2 = -number2
+        } else {
+            signedNumber2 = number2
         }
         
-        label1.text = number1.description
-        label2.text = number2.description
+        label1.text = signedNumber1.description
+        label2.text = signedNumber2.description
         
-        resultLabel.text = (number1 + number2).description
+        resultLabel.text = (signedNumber1 + signedNumber2).description
         
     }
     
